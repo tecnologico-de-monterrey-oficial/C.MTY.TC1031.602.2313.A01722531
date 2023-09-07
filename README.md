@@ -1,8 +1,8 @@
 # Estructura de Datos y Algoritmos Fundamentales
 ### TC1031 - Gpo 602
 ### Nombre: 
-## Escribe tu nombre
+## Greta Paola Guagnelli González
 ### Matrícula: 
-## Escribe tu matrícula
+## A01722531
 ### Carrera: 
-## Escribe las iniciales de tu carrera
+## ITD
