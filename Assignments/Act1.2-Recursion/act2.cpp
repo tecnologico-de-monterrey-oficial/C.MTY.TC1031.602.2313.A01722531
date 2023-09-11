@@ -1,3 +1,8 @@
+// greta guagnelli
+// a01722531
+// act 1.2
+
+
 #include <iostream>
 using namespace std;
 
