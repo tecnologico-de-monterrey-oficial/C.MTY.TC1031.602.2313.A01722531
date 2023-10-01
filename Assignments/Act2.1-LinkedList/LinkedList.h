@@ -1,3 +1,4 @@
+
 #ifndef LinkedList_h
 #define LinkedList_h
 
@@ -11,13 +12,22 @@ private:
 public:
     LinkedList();
     void addFirst(T data);
+    void addLast(T data);
+    void insert (int index, T data);
+    bool deleteData (T data);
+    bool deleteAt (int index);
+    T getData (int index);
+    void updateData(T data, T newData);
+    void updateAt (int index, T data);
+    int findData (T data);
     void print();
     int getSize();
     bool isEmpty();
-    void addLast(T data);
-    void insert (int index, T data);
-    int findData (T data);
+    T operator [] (int index);
+    void operator = (LinkedList<T> list);
+    LinkedList<T> duplicate (LinkedList<T> list);
 };
+
 
 template<class T>
 LinkedList<T>::LinkedList() {
@@ -36,24 +46,6 @@ void LinkedList<T>::addFirst(T data) {
     head = new Node<T>(data, head);
     //Incrementamos el valor de size en 1
     size++;
-}
-
-template<class T>
-void LinkedList<T>::print() {
-    // Define a pointer of the node type and initialize it to the head;
-    Node<T>* aux = head;
-    while (aux != nullptr) {
-        // Print the value of the node
-        cout << aux->data;
-        // Check if there is a next node
-        if (aux->next != nullptr) {
-            cout << " -> ";
-        }
-        // Move to the next node
-        aux = aux->next;
-    }
-    // Print a newline character after the list
-    cout << endl;
 }
 
 template<class T>
@@ -94,38 +86,168 @@ void LinkedList<T>::insert(int index, T data) {
 }
 
 template<class T>
-int LinkedList<T>::findData(T data) {
-    // definimos un apuntador auxiliar igual a head 
-    Node<T>* aux = head;
-    // definimos un índice auxiliar
-    int auxIndex = 0;
-    while (aux != nullptr) {
-        if (data == aux->data) {
-            // ya lo encontramos
-            return auxIndex;
+bool LinkedList<T>::deleteData (T data){
+    // validamos si la lista está vacía
+    if (!isEmpty()) {
+        if (head -> data == data) {
+            Node<T>* aux = head;
+            head = head-> next;
+            size--;
+            delete aux;
+            return true;
+
         } else {
-            // recorremos aux
-            aux = aux->next;
-            // incrementamos el índice auxiliar
-            auxIndex++;
-        }
+            Node<T>* aux = head -> next;
+            Node<T>* auxPrev = nullptr;
+            while (aux != nullptr) {
+                if (aux-> data == data){
+                    auxPrev->next = aux->next;
+                    size--;
+                    delete aux;
+                    return true;
+                }
+                auxPrev = aux;
+                aux = aux->next;
+            }
+            return false;
+        } 
     }
-    // no lo encontramos
-    return -1;
-    
+    else {
+        return false;
+    }
 }
 
 template<class T>
-T LinkedList<T>::getData(int index) {
-    
+bool LinkedList<T>::deleteAt (int index){
+    if (index >= 0 && index < size) {
+        if (index == 0) {
+            Node<T>* aux = head;
+            head = head-> next;
+            size--;
+            delete aux;
+            return true;
+        } else {
+        return false;
+        }
+    }
 
 }
 
+
+template<class T>
+T LinkedList<T>::getData(int index) {
+    if (index >= 0 && index < size) {
+        Node<T>* aux = head;
+        int auxIndex= 0;
+        while (auxIndex < index) {
+            aux = aux-> next;
+            auxIndex++;
+        }
+
+        return aux->data;
+    } else {
+        throw out_of_range("Índice incorrecto");
+    }
+
+}
+
+template<class T>
+void LinkedList<T>::updateData(T data, T newData) {
+    Node<T>* aux = head;
+    int auxIndex = 0;
+    while (aux != nullptr) {
+        if (aux->data == data) {
+            aux->data = newData; 
+            return;
+        }
+        aux = aux->next;
+        auxIndex++;
+    }
+    throw out_of_range (" El dato a actualizar no se encontró en la lista");
+}
+
+template<class T>
+void LinkedList<T>::updateAt (int index, T data) {
+    if (index >= 0 && index < size) {
+        Node<T>* aux = head;
+        int auxIndex = 0;
+        while (auxIndex < index) {
+            aux = aux->next;
+            auxIndex++;
+        }
+        aux->data = data;
+    } else {
+        throw out_of_range ("Índice inválido");
+    }
+
+}
+
+
+
+template<class T>
+void LinkedList<T>::print() {
+    // Define a pointer of the node type and initialize it to the head;
+    Node<T>* aux = head;
+    while (aux != nullptr) {
+        // Print the value of the node
+        cout << aux->data;
+        // Check if there is a next node
+        if (aux->next != nullptr) {
+            cout << " -> ";
+        }
+        // Move to the next node
+        aux = aux->next;
+    }
+    // Print a newline character after the list
+    cout << endl;
+}
+
+template<class T>
+int LinkedList<T>::findData(T data) {
+    Node<T>* aux = head;
+    int auxIndex = 0;
+    while (aux != nullptr) {
+        if (aux->data == data) {
+            return auxIndex;
+        }
+        aux = aux->next;
+        auxIndex++;
+    }
+    return -1;
+}
+
+template<class T>
+T LinkedList<T>::operator[](int index) {
+    if (index >= 0 && index < size) {
+        Node<T>* aux = head;
+        int auxIndex= 0;
+        while (auxIndex < index) {
+            aux = aux-> next;
+            auxIndex++;
+        }
+
+        return aux->data;
+    } else {
+        throw out_of_range("Índice incorrecto");
+    }
+
+}
 
 
 template<class T>
 bool LinkedList<T>::isEmpty() {
     return size == 0;
+}
+
+template<class T>
+LinkedList<T> LinkedList<T>::duplicate (LinkedList<T> list) {
+    LinkedList<T> newList;
+    Node<T>* aux =list.head;
+    while (aux != nullptr) {
+        newList.addLast (aux->data);
+        aux = aux->next;
+    }
+    return newList;
 }
 
 
