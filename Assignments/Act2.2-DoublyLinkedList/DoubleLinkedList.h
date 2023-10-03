@@ -3,7 +3,7 @@
 // ITD
 
 #include <iostream>
-#include "node.h"
+#include "Node.h"
 using namespace std;
 
 template<class T>
@@ -245,6 +245,5 @@ void DoubleLinkedList<T>::deleteDuplicates(DoubleLinkedList<T> &list) {
         deleteAt(i);
     }
 }
-
 
 
