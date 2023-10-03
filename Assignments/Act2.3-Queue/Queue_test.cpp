@@ -1,76 +1,57 @@
-#include <iostream>
-#include "queue.h" // Asegúrate de incluir el archivo de encabezado de tu clase Queue
-using namespace std;
+// greta guagnelli
+// a01722531
+// ITD
 
+// act2.3 Queue
+
+#include <iostream>
+using namespace std;
+#include "queue.h"
 
 int main() {
-    Queue<int> myQueue;
+    Queue<int> queue;
     int option;
-    int element;
     do {
-        cout << "----- Menu de Opciones:------ " << endl;
-        cout << "1. Eliminar elemento de la cola" << endl;
-        cout << "2. Agregar elemento a la cola" << endl;
-        cout << "3. Obtener el frente de la cola" << endl;
-        cout << "4. Verificar si la cola está vacía" << endl;
-        cout << "5. Salir" << endl;
-        cout << "Seleccione una opción: ";
+
+        cout << "-------- Menú de operaciones ---------" << endl;
+        cout << "1. Borrar primer elemento agregado al Queue" << endl; 
+        cout << "2. Agregar un elemento al Queue" << endl;
+        cout << "3. Obtener el primer elemento del Queue" << endl;
+        cout << "4. Salir" << endl;
+        cout << "-------------------------------" << endl;
+        cout << "Elija una opción: ";
         cin >> option;
+        cout << endl;
 
-    switch (option) {
-            case 1:
-                try {
-                    myQueue.pop();
-                    cout << "Elemento a agregar." << endl;
-                } catch (const runtime_error& e) {
-                    cerr << e.what() << endl;
-                }
-            case 2: {
-                cout << "Elemento eliminado: ";
-                cin >> element;
-                myQueue.push(element);
-                break;
-            }
-            case 3:
-                try {
-                    cout << "Frente de la cola: " << myQueue.front() << endl;
-                } catch (const runtime_error& e) {
-                    cerr << e.what() << endl;
-                }
-                break;
-            case 4:
-                if (myQueue.isEmpty()) {
-                    cout << "La cola está vacía." << endl;
-                } else {
-                    cout << "La cola no está vacía." << endl;
-                }
-                break;
-            case 5:
-                cout << "Saliendo del programa." << endl;
-                break;
-            default:
-                cout << "Opción no válida. Intente de nuevo." << endl;
+        switch (option)
+        {
+        case 1: {
+            queue.pop();
+            queue.print();
+            cout << "El primer elemento ha sido borrado" << endl; 
+            break;
         }
-    } while (option != 5);
+        case 2: {
+            int element;
+            cout << "Ingresa el elemento a agregar: " << endl;
+            cin >> element;
+            queue.push(element);
+            queue.print();
+            cout << "El elemento " << element << " ha sido agregado al Queue" << endl;
+            break;
+        }
+        case 3: {
+            cout << "El primer elemento del Queue es: " << queue.front() << endl;
+            break;
+        }
+        case 4: {
+            break;
+        }
+        default:
+            break;
+        }
 
+    }
+    while (option != 4);
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

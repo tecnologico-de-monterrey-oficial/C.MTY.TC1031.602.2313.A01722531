@@ -1,58 +1,80 @@
+
 #ifndef QUEUE_H
 #define QUEUE_H
+#include <iostream>
+
 
 #include "node.h"
 
 template <class T>
 class Queue {
 private:
-    Node<T>* frontNode;
+    Node<T>* head;
     Node<T>* tail;
-
 public:
     Queue();
-    void push(const T& data); // agrega un elemento al final de la cola
-    void pop(); // elimina el primer elemento de la cola
-    T front() const; // regresa el primer elemento
-    bool isEmpty() const;
+    void pop();
+    void push (T data);
+    T front();
+    bool isEmpty();
+    void print();
 };
 
 template <class T>
-Queue<T>::Queue() : frontNode(nullptr), tail(nullptr) {}
-
-template <class T>
-void Queue<T>::push(const T& data) {
-    Node<T>* newNode = new Node<T>(data);
-    if (isEmpty()) {
-        frontNode = newNode;
-        tail = newNode;
-    } else {
-        tail->setNext(newNode);
-        tail = newNode;
-    }
-}
+Queue<T>::Queue(){
+    head = nullptr;
+    tail = nullptr;
+} 
 
 template <class T>
 void Queue<T>::pop() {
-    if (!isEmpty()) {
-        Node<T>* temp = frontNode;
-        frontNode = frontNode->getNext();
-        delete temp;
-    }
-}
-
-template <class T>
-T Queue<T>::front() const {
-    if (!isEmpty()) {
-        return frontNode->getData();
+    if (isEmpty()) {
+        cout << "La fila está vacía" << endl;
     } else {
-        throw out_of_range ("La cola está vacía.");
+        Node<T>* aux = head;
+        head = head -> next;
+        delete aux; 
+    }
+}
+
+template <class T>  
+void Queue<T>::push(T data) {
+    Node<T>* newNode = new Node<T>(data);
+    if (isEmpty()) {
+        head = newNode;
+        tail = newNode;
+    } else {
+        tail -> next = newNode;
+        tail = newNode;
     }
 }
 
 template <class T>
-bool Queue<T>::isEmpty() const {
-    return frontNode == nullptr;
+T Queue<T>::front() {
+    if (isEmpty()) {
+        cout << "La fila está vacía" << endl;
+        return 0;
+    } else {
+        return head -> data;
+    }
 }
 
-#endif // QUEUE_H
+template <class T>
+bool Queue<T>::isEmpty() {
+    return head == nullptr;
+}
+
+template <class T>
+void Queue<T>::print() {
+    Node<T>* aux = head;
+    while (aux != nullptr) {
+        cout << aux -> data << endl;
+        aux = aux -> next;
+    }
+    cout << endl << endl;  
+}
+
+
+#endif
+
+
