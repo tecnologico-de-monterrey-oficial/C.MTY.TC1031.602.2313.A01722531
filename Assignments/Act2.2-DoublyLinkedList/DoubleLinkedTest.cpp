@@ -53,10 +53,11 @@ void options(DoubleLinkedList<T>& list) {
         cout << "8. Actualizar un elemento que se encuentra en una posición dada de la lista" << endl;
         cout << "9. Encuentra un elemento dado en la lista" << endl;
         cout << "10. Duplicar lista" << endl;
-        cout << "11. Borrar duplicados" << endl;
-        cout << "12. Vaciar lista" << endl;
-        cout << "13. Imprimir lista" << endl;
-        cout << "14. Salir" << endl;
+        cout << "11. Ordenar lista" << endl; 
+        cout << "12. Borrar duplicados" << endl;
+        cout << "13. Vaciar lista" << endl;
+        cout << "14. Imprimir lista" << endl;
+        cout << "15. Salir" << endl;
         cout << "-------------------------------" << endl;
         cout << "Elija una opción: ";
         cin >> option;
@@ -157,7 +158,7 @@ void options(DoubleLinkedList<T>& list) {
                 break;
             }
             case 11: { // sort
-                list.bubbleSort(list);
+                list.Sort();
                 list.print();
                 break;
             }

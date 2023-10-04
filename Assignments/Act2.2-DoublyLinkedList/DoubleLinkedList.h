@@ -29,7 +29,7 @@ public:
     void operator=(DoubleLinkedList<T> list);
     void clear();
     void duplicate(DoubleLinkedList<T> &list);
-    void bubbleSort(DoubleLinkedList<T> &list);
+    void Sort();
     void deleteDuplicates(DoubleLinkedList<T> &list);
 };
 
@@ -213,7 +213,7 @@ void DoubleLinkedList<T>::duplicate(DoubleLinkedList<T> &list) {
 }
 
 template<class T>
-void DoubleLinkedList<T>::bubbleSort(DoubleLinkedList<T> &list) {
+void DoubleLinkedList<T>::Sort() {
     bool swapped;
     Node<T>* current;
     Node<T>* last = nullptr;
