@@ -10,32 +10,107 @@
 using namespace std;
 #include "DoubleLinkedList.h"
 
+void createListInt(DoubleLinkedList<int> &listInt, int quantity){
+  for (int i = 0; i < quantity; i++)
+  {
+    int num = rand() % 1000 + 1;
+    listInt.addLast(num);
+  }
+}
 
-void createListInt (DoubleLinkedList<int> &list, int quantity) {
-    for (int i = 0; i < quantity; i++) { 
-        int num = rand() % 100 + 1;
-        list.addLast(num);
+string PalabraAleatoria(int longitud) {
+    string caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    string resultado;
+    for (int i = 0; i < longitud; i++) {
+        int indiceAleatorio = rand() % caracteres.length();
+        resultado += caracteres[indiceAleatorio];
+    }
+    return resultado;
+}
+
+void createListString(DoubleLinkedList<string> &list,int quantity,int longitud){
+    for (int i = 0; i < quantity; i++) {
+        string nuevoString = PalabraAleatoria(longitud);
+        list.addLast(nuevoString);
     }
 }
 
-void inputListInt(DoubleLinkedList<int> &list, int quantity) {
-  for (int i = 0; i < quantity; i++)
-  {
-    int num;
-    cout << "ingresa el número: " << endl;
-    cin >> num;
-    list.addLast(num);
-  }
+void listInt(DoubleLinkedList<int> &listInt){
+    int n = 0;
+    cout << "Quisieras que la lista se genere de manera:" << endl;
+    cout << "1. Aleatoria" << endl;
+    cout << "2. Manual" << endl;
+    cout << "Teclea la opcion: ";
+    cin >> n; cout << endl;
+
+    while (n != 1 && n != 2){
+        cout <<"Opción inválida, vuelve a intentar"<< endl << endl;
+        cout << "Quisieras que la lista se genere de manera:" << endl;
+        cout << "1. Aleatoria" << endl;
+        cout << "2. Manual" << endl;
+        cin >> n; cout << endl;
+    }
+           
+    if (n == 1) {
+        int x = 0;
+        cout << endl; 
+        cout << "Teclea la cantidad de números: " << endl;
+        cin >> x;
+        createListInt(listInt,x);
+       
+    } else if (n == 2) {
+        int x = 0, n = 0;
+        cout << endl; 
+        cout << "Teclea la cantidad de números: " << endl;
+        cin >> x;             
+        for (int i = 0; i<x ; i++){
+           cout << "Teclea el elemento " << i << " : " ;
+           cin >> n; 
+           listInt.addLast(n);
+        }
+        
+    throw out_of_range("error!");
+}
 }
 
-void inputListString(DoubleLinkedList<string> &list, int quantity) {
-  for (int i = 0; i < quantity; i++)
-  {
-    string item;
-    cout << "ingresa el elemento: " << endl;
-    cin >> item;
-    list.addLast(item);
-  }
+void listString(DoubleLinkedList<string> &listString){
+    int n = 0;
+    cout << "Quisieras que la lista se genere de manera:" << endl;
+    cout << "1. Aleatoria" << endl;
+    cout << "2. Manual" << endl;
+    cin >> n; cout << endl;
+
+    while (n != 1 && n != 2){
+        cout <<"OPCION NO VALIDA"<< endl << endl;
+        cout << "Selecciona una opcion" << endl;
+        cout << "1) Lista con datos aleatorios" << endl;
+        cout << "2) Lista con datos capturados" << endl;
+        cin >> n; cout << endl;
+    }
+
+    if (n == 1) {
+        int x = 0,longString = 0;
+        cout << endl; 
+        cout << "Teclea la cantidad de palabras: " << endl;
+        cin >> x;
+        cout << "Ingresa el numero de caracteres en cada palabra: " << endl;
+        cin >> longString;
+        createListString(listString,x,longString);
+
+    } else if (n == 2) {
+        int x = 0;
+        string n;
+        cout <<  endl; 
+        cout << "Teclea la cantidad de palabras: "; 
+        cin >> x;               
+        for (int i = 0; i<x ; i++){
+           cout << "Ingresa la(s) palabra(s) " << i << " : ";
+           cin >> n; 
+           listString.addLast(n);
+        }
+       
+    }
+    throw out_of_range("error!");
 }
 
 template<class T>
@@ -187,6 +262,8 @@ void options(DoubleLinkedList<T>& list) {
 
 }
 
+
+
 int main() {
     int optionList;
     int createList;
@@ -196,48 +273,20 @@ int main() {
     cout << "2. string (teclea el número)" << endl;
     cin >> optionList;
 
-    switch (optionList) {
-        case 2:
-            createList = 1;
-            break;
-        default:
-            cout << "quisieras que la lista se genere de manera:" << endl;
-            cout << "1. aleatoria" << endl;
-            cout << "2. manual" << endl;
-            cin >> createList;
-            break;
+    if (optionList == 1) {
+        DoubleLinkedList<int> intList;
+        listInt(intList);
+        intList.print();
+        options(intList);
+    } else if (optionList == 2) {
+        DoubleLinkedList<string> stringList;
+        listString(stringList);
+        stringList.print();
+        options(stringList);
+    } else {
+        cout << "Opción inválida" << endl;
     }
-
-    if (optionList == 1 && createList == 2) {
-        DoubleLinkedList<int> list;
-
-        int quantity;
-        cout << "teclea la cantidad de números:" << endl;
-        cin >> quantity;
-        createListInt(list, quantity);
-        list.print();
-        options(list);
-
-     } else if (optionList == 1 && createList == 1) {
-      DoubleLinkedList<int> list;
-
-      int quantity;
-      cout << "teclea la cantidad de numeros: " << endl;
-      cin >> quantity;
-      inputListInt(list, quantity);
-      list.print();
-      options(list);
-
-    } else if (optionList == 2 && createList == 1) {
-      DoubleLinkedList<string> list;
-
-      int quantity;
-      cout << "teclea la cantidad de elementos: " << endl;
-      cin >> quantity;
-      inputListString(list, quantity);
-      list.print();
-      options(list);
-    }
+    
 
     return 0;
     }
