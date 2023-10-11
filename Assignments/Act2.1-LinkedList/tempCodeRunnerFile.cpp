@@ -185,43 +185,41 @@ void options(LinkedList<T>& list) {
             }
 
             case 7: { // updateData
-              T element;
-              T newElement;
-              cout << "ingresa el elemento: " << endl;
-              cin >> element;
-              cout << "ingresa el elemento nuevo: " << endl;
-              cin >> newElement;
-              list.updateData(element, newElement);
-              list.print();
-              break;
+            T element;
+            T newElement;
+            cout << "ingresa el elemento: " << endl;
+            cin >> element;
+            cout << "ingresa el elemento nuevo: " << endl;
+            cin >> newElement;
+            list.updateData(element, newElement);
+            list.print();
+            break;
             }
 
             case 8: { // updateAt
-              T element;
-              int index;
-              cout << "ingresa el elemento: " << endl;
-              cin >> index;
-              cout << "ingresa el elemento nuevo: " << endl;
-              cin >> element;
-              list.updateAt(index, element);
-              list.print();
-              break;
+            T element;
+            int index;
+            cout << "ingresa el elemento: " << endl;
+            cin >> index;
+            cout << "ingresa el elemento nuevo: " << endl;
+            cin >> element;
+            list.updateAt(index, element);
+            list.print();
+            break;
             }
 
             case 9: { // findData
-              T element;
-              cout << "ingresa el elemento: " << endl;
-              cin >> element;
-              cout << "index: " << list.findData(element) << endl << endl;
-              break;
+            T element;
+            cout << "ingresa el elemento: " << endl;
+            cin >> element;
+            cout << "index: " << list.findData(element) << endl << endl;
+            break;
             }
 
             case 10: { // duplicar
-              list.duplicate();
-              list.print();
-              break;
+            duplicatesList.push_back(list.duplicate(list));
+            break;
             }
-
             case 11: {
                 list.print();
                 break;
@@ -249,7 +247,6 @@ int main() {
         listInt(intList);
         intList.print();
         options(intList);
-
     } else if (optionList == 2) {
         LinkedList<string> stringList;
         listString(stringList);
@@ -259,7 +256,6 @@ int main() {
         cout << "Opción inválida" << endl;
     }
     
-
 
     return 0;
     }

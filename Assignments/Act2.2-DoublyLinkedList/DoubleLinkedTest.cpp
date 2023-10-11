@@ -81,7 +81,7 @@ void listString(DoubleLinkedList<string> &listString){
     cin >> n; cout << endl;
 
     while (n != 1 && n != 2){
-        cout <<"OPCION NO VALIDA"<< endl << endl;
+        cout <<"opción no valida"<< endl << endl;
         cout << "Selecciona una opcion" << endl;
         cout << "1) Lista con datos aleatorios" << endl;
         cout << "2) Lista con datos capturados" << endl;
@@ -228,7 +228,7 @@ void options(DoubleLinkedList<T>& list) {
             }
 
             case 10: { // duplicar
-                list.duplicate(list);
+                list.duplicate();
                 list.print();
                 break;
             }
@@ -262,8 +262,6 @@ void options(DoubleLinkedList<T>& list) {
 
 }
 
-
-
 int main() {
     int optionList;
     int createList;
@@ -278,6 +276,7 @@ int main() {
         listInt(intList);
         intList.print();
         options(intList);
+
     } else if (optionList == 2) {
         DoubleLinkedList<string> stringList;
         listString(stringList);

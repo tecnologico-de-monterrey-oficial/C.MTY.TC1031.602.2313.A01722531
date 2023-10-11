@@ -20,6 +20,7 @@ public:
     void updateData(T data, T newData);
     void updateAt (int index, T data);
     int findData (T data);
+    void duplicate(LinkedList<T> &list);
     void print();
     int getSize();
     bool isEmpty();
@@ -130,7 +131,6 @@ bool LinkedList<T>::deleteAt (int index){
         return false;
         }
     }
-
 }
 
 
@@ -233,22 +233,22 @@ T LinkedList<T>::operator[](int index) {
 
 }
 
+template<class T>
+void LinkedList<T>::duplicate() {
+    Node<T>* aux = head;
+    int auxIndex = 0;
+    while(aux != nullptr){
+        insert(auxIndex, aux->data);
+        aux = aux->next->next;
+        auxIndex+=2;
+    }
+}
 
 template<class T>
 bool LinkedList<T>::isEmpty() {
     return size == 0;
 }
 
-template<class T>
-LinkedList<T> LinkedList<T>::duplicate (LinkedList<T> list) {
-    LinkedList<T> newList;
-    Node<T>* aux =list.head;
-    while (aux != nullptr) {
-        newList.addLast (aux->data);
-        aux = aux->next;
-    }
-    return newList;
-}
 
 
 #endif
