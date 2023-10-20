@@ -20,7 +20,7 @@ public:
     void updateData(T data, T newData);
     void updateAt (int index, T data);
     int findData (T data);
-    void duplicate(LinkedList<T> &list);
+    void duplicate();
     void print();
     int getSize();
     bool isEmpty();

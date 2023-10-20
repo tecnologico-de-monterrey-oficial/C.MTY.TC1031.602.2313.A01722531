@@ -228,7 +228,7 @@ void options(DoubleLinkedList<T>& list) {
             }
 
             case 10: { // duplicar
-                list.duplicate();
+                list.duplicate(list);
                 list.print();
                 break;
             }
